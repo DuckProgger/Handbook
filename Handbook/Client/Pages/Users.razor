@@ -1,0 +1,50 @@
+﻿@using Handbook.Client.Services.UserService
+@using Handbook.Shared
+
+@page "/users"
+@inject IUserService UserService;
+
+<h3>Users</h3>
+
+@if (users == null)
+{
+    <span>Список пользователей пуст.</span>
+}
+else
+{
+    @* <div class="container">
+            <div ></div>
+        </div>*@
+    <table>
+        <thead>
+            <tr>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in users)
+            {
+                <tr>
+                    <td>@user.LastName</td>
+                    <td>@user.FirstName</td>
+                    <td>@user.Patronymic</td>
+                   @* <td>
+                        <a class="btn btn-info" href="update"></a>
+                    </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    List<User> users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = await UserService.GetAllUsersAsync();
+    }
+}
