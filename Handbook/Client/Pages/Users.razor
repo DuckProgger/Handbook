@@ -4,14 +4,23 @@
 @page "/users"
 @inject IUserService UserService;
 
-<h3>Users</h3>
+<UserForm Header="Добавить пользователя"
+          User="@user"
+          ButtonText="Добавить"
+          ButtonStyle="info"
+          OnSubmit="@Create" />
 
 @if (users == null)
 {
-    <span>Список пользователей пуст.</span>
+    <span>Список пользователей загружается...</span>
 }
 else
 {
+    if (users.Count == 0)
+    {
+        <span>Список пользователей пуст.</span>
+        return;
+    }
     @* <div class="container">
             <div ></div>
         </div>*@
@@ -30,9 +39,14 @@ else
                     <td>@user.LastName</td>
                     <td>@user.FirstName</td>
                     <td>@user.Patronymic</td>
-                   @* <td>
-                        <a class="btn btn-info" href="update"></a>
-                    </td>*@
+                    <td>
+                        <a class="btn btn-info" href="editUser/@user.Id">
+                            <i class="oi oi-pencil"></i>
+                        </a>
+                        <a class="btn btn-info" href="deleteUser/@user.Id">
+                            <i class="oi oi-trash"></i>
+                        </a>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -41,10 +55,25 @@ else
 
 
 @code {
-    List<User> users;
+    private List<User> users;
+    private User user = new();
 
     protected override async Task OnInitializedAsync()
     {
+        await GetUsers();
+    }
+
+    private async void Create()
+    {
+        await UserService.AddUserAsync(user);
+        await GetUsers();
+        user = new();
+        StateHasChanged();
+    }
+
+    private async Task GetUsers()
+    {
         users = await UserService.GetAllUsersAsync();
+
     }
 }
