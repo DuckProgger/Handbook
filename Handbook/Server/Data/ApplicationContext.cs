@@ -15,9 +15,9 @@ namespace Handbook.Server.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasData(
-                new User { Id = 1, FirstName = "Вася", Patronymic = "Васильевич", LastName = "Пупкин" },
-                new User { Id = 2, FirstName = "Петя", Patronymic = "Петрович", LastName = "Петров" },
-                new User { Id = 3, FirstName = "Иван", Patronymic = "Иванович", LastName = "Иванов" }
+                new User { Id = 1, FirstName = "Вася", Patronymic = "Васильевич", LastName = "Пупкин", Active = true },
+                new User { Id = 2, FirstName = "Петя", Patronymic = "Петрович", LastName = "Петров", Active = true },
+                new User { Id = 3, FirstName = "Иван", Patronymic = "Иванович", LastName = "Иванов", Active = true }
             );
         }
     }

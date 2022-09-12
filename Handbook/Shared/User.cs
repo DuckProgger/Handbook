@@ -9,5 +9,6 @@ public class User
     public string LastName { get; set; } = string.Empty;
     public string Patronymic { get; set; } = string.Empty;
     public ActiveDirectoryLogin? ActiveDirectoryLogin { get; set; }
+    public bool Active { get; set; }
 }
 

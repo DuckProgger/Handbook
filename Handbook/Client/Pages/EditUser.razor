@@ -1,0 +1,36 @@
+﻿@using Handbook.Shared
+@using Handbook.Client.Services.UserService
+
+@page "/edituser/{userid:int}"
+@inject IUserService UserService;
+@inject NavigationManager navigation;
+
+@if (user is null)
+{
+    <span>Пользователь не найден.</span>
+    return;
+}
+<UserForm Header="Изменить пользователя"
+          User="@user"
+          ButtonText="Изменить"
+          ButtonStyle="info"
+          OnSubmit="@UpdateUser" />
+
+@code {
+
+    [Parameter]
+    public int UserId { get; set; }
+
+    private User? user;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        user = await UserService.GetUserAsync(UserId);
+    }
+
+    private async Task UpdateUser()
+    {
+        await UserService.UpdateUserAsync(user!);
+        navigation.NavigateTo("users");
+    }
+}

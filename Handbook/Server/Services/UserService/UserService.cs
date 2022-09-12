@@ -14,7 +14,7 @@ namespace Handbook.Server.Services.UserService
         }
         public async Task<List<User>> GetAllUsersAsync()
         {
-            return await context.Users.ToListAsync();
+            return await context.Users.Where(u => u.Active).ToListAsync();
         }
 
         public async Task<User?> GetUserAsync(int id)
@@ -31,18 +31,19 @@ namespace Handbook.Server.Services.UserService
 
         public async Task<User?> UpdateUserAsync(User user)
         {
-            var existingUser = await context.Users.FirstOrDefaultAsync(u => u.Id == user.Id);
-            if (existingUser is null) return null;
-            var entry = context.Users.Update(user);
+            bool userExists = await context.Users.AnyAsync(u => u.Id == user.Id);
+            if (!userExists) return null;
+            context.Entry(user).State = EntityState.Modified;
             await context.SaveChangesAsync();
-            return entry.Entity;
+            return user;
         }
 
         public async Task<bool> RemoveUserAsync(int id)
         {
             var existingUser = await context.Users.FirstOrDefaultAsync(u => u.Id == id);
             if (existingUser is null) return false;
-            context.Users.Remove(existingUser);
+            existingUser.Active = false;
+            context.Entry(existingUser).State = EntityState.Modified;
             await context.SaveChangesAsync();
             return true;
         }
