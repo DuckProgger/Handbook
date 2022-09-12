@@ -25,6 +25,7 @@ namespace Handbook.Server.Services.UserService
         public async Task<bool> AddUserAsync(User user)
         {
             await context.Users.AddAsync(user);
+            user.Active = true;
             var entries = await context.SaveChangesAsync();
             return entries > 0;
         }

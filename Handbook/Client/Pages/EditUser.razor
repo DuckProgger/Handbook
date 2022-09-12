@@ -5,6 +5,11 @@
 @inject IUserService UserService;
 @inject NavigationManager navigation;
 
+@if (loading)
+{
+    <span>Загрузка...</span>
+    return;
+}
 @if (user is null)
 {
     <span>Пользователь не найден.</span>
@@ -22,10 +27,12 @@
     public int UserId { get; set; }
 
     private User? user;
+    private bool loading = true;
 
     protected override async Task OnParametersSetAsync()
     {
         user = await UserService.GetUserAsync(UserId);
+        loading = false;
     }
 
     private async Task UpdateUser()

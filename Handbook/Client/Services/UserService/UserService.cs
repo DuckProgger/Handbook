@@ -41,7 +41,7 @@ namespace Handbook.Client.Services.UserService
         public async Task<bool> RemoveUserAsync(int id)
         {
             var client = clientFactory.CreateClient(nameof(IUserService));
-            var response = await client.PutAsJsonAsync("delete", id);
+            var response = await client.DeleteAsync($"{id}");
             return await response.Content.ReadFromJsonAsync<bool>();
         }
     }
