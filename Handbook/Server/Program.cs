@@ -52,5 +52,6 @@ internal class Program
         builder.Services.AddRazorPages();
 
         builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddScoped<IActiveDirectoryService, ActiveDirectoryService>();
     }
 }

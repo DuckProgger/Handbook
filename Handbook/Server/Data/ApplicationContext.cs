@@ -11,6 +11,7 @@ namespace Handbook.Server.Data
         }
 
         public DbSet<User> Users { get; set; } = null!;
+        public DbSet<ActiveDirectoryLogin> ADLogins { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
