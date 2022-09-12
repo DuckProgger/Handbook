@@ -3,19 +3,29 @@
 
 <h3>@Header</h3>
 
-<EditForm Model="User" OnSubmit="OnSubmit">
+<EditForm Model="User" OnValidSubmit="OnSubmit">
+    <DataAnnotationsValidator />
     <div>
         <div class="row">
             <label>Имя</label>
-            <InputText @bind-Value="@User.FirstName" class="form-control"></InputText>
+            <div>
+                <InputText @bind-Value="@User.FirstName" class="form-control" />
+                <ValidationMessage For="() => User.FirstName" />
+            </div>
         </div>
         <div class="row">
             <label>Отчество</label>
-            <InputText @bind-Value="@User.Patronymic" class="form-control"></InputText>
+            <div>
+                <InputText @bind-Value="@User.Patronymic" class="form-control" />
+                <ValidationMessage For="() => User.Patronymic" />
+            </div>
         </div>
         <div class="row">
             <label>Фамилия</label>
-            <InputText @bind-Value="@User.LastName" class="form-control"></InputText>
+            <div>
+                <InputText @bind-Value="@User.LastName" class="form-control" />
+                <ValidationMessage For="() => User.LastName" />
+            </div>
         </div>
     </div>
     <button type="submit" class="btn btn-@ButtonStyle">@ButtonText</button>
@@ -23,13 +33,13 @@
 
 @code {
     [Parameter]
-    public string? Header { get; set; } 
+    public string? Header { get; set; }
 
     [Parameter]
     public User? User { get; set; }
 
     [Parameter]
-    public string? ButtonText { get; set; } 
+    public string? ButtonText { get; set; }
 
     [Parameter]
     public string ButtonStyle { get; set; } = "info";
