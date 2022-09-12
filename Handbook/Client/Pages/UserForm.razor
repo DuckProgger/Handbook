@@ -5,15 +5,15 @@
 
 <EditForm Model="User" OnSubmit="OnSubmit">
     <div>
-        <div>
+        <div class="row">
             <label>Имя</label>
             <InputText @bind-Value="@User.FirstName" class="form-control"></InputText>
         </div>
-        <div>
+        <div class="row">
             <label>Отчество</label>
             <InputText @bind-Value="@User.Patronymic" class="form-control"></InputText>
         </div>
-        <div>
+        <div class="row">
             <label>Фамилия</label>
             <InputText @bind-Value="@User.LastName" class="form-control"></InputText>
         </div>

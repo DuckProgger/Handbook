@@ -21,10 +21,7 @@ else
         <span>Список пользователей пуст.</span>
         return;
     }
-    @* <div class="container">
-            <div ></div>
-        </div>*@
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Фамилия</th>
@@ -43,9 +40,6 @@ else
                         <a class="btn btn-info" href="editUser/@user.Id">
                             <i class="oi oi-pencil"></i>
                         </a>
-                        @* <a class="btn btn-info" href="deleteUser/@user.Id">
-                            <i class="oi oi-trash"></i>
-                        </a>*@
                         <button class="btn btn-info" onclick="@(async () => await DeleteUser(user.Id))">
                             <i class="oi oi-trash"></i>
                         </button>
