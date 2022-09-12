@@ -27,6 +27,8 @@ else
                 <th>Фамилия</th>
                 <th>Имя</th>
                 <th>Отчество</th>
+                <th>Домен AD</th>
+                <th>Логин AD</th>
             </tr>
         </thead>
         <tbody>
@@ -36,6 +38,8 @@ else
                     <td>@user.LastName</td>
                     <td>@user.FirstName</td>
                     <td>@user.Patronymic</td>
+                    <td>@user.ActiveDirectoryLogin?.Domain</td>
+                    <td>@user.ActiveDirectoryLogin?.Login</td>
                     <td>
                         <a class="btn btn-info" href="editUser/@user.Id">
                             <i class="oi oi-pencil"></i>

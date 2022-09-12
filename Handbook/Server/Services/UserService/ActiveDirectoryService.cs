@@ -6,6 +6,7 @@ class ActiveDirectoryService : IActiveDirectoryService
 {
     public Task<ActiveDirectoryLogin> GetLoginAsync(string userName)
     {
+        // Заглушка.
         var adLogin = new ActiveDirectoryLogin()
         {
             Domain = "CompanyDomain",

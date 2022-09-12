@@ -35,6 +35,7 @@ public class User
     /// Логин Active Directory.
     /// </summary>
     public ActiveDirectoryLogin? ActiveDirectoryLogin { get; set; }
+    public int? ActiveDirectoryLoginId { get; set; }
    
     /// <summary>
     /// Статус записи (действующая/недействующая).
